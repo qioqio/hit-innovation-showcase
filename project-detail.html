@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈工大郑州研究院双创基地 - 项目详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #00529b;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(0, 82, 155, 0.1);
+        }
+
+        .back-link:hover {
+            background: rgba(0, 82, 155, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .project-header {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-title {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .project-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            border-radius: 2px;
+        }
+
+        .project-meta {
+            color: #666;
+            margin-bottom: 25px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .project-meta p {
+            background: #f8f9fa;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-image:hover {
+            transform: scale(1.01);
+        }
+
+        .project-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            animation: slideIn 0.8s ease-out 0.2s both;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.3s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #3498db;
+        }
+
+        .section-content {
+            color: #444;
+            line-height: 1.8;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-list li:hover {
+            transform: translateX(5px);
+        }
+
+        .feature-list li:before {
+            content: "→";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-list li:hover:before {
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .project-header,
+            .project-content {
+                padding: 25px;
+            }
+
+            .project-title {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+        }
+
+        /* 添加滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* 添加新的样式 */
+        .institute-header {
+            background: linear-gradient(135deg, #00529b, #003366);
+            padding: 20px 0;
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .institute-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .institute-logo {
+            max-width: 60px;
+            height: auto;
+        }
+
+        .institute-title {
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #00529b, #003366);
+            color: white;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: rgba(255,255,255,0.8);
+        }
+    </style>
+</head>
+<body>
+    <header class="institute-header">
+        <div class="container">
+            <img src="https://www.hit.edu.cn/_upload/site/00/05/5/logo.png" alt="哈工大校徽" class="institute-logo">
+            <div class="institute-title">哈工大郑州研究院双创基地</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← 返回项目列表</a>
+
+        <article class="project-header">
+            <h1 class="project-title">项目名称</h1>
+            <div class="project-meta">
+                <p>发布时间：2024年3月</p>
+                <p>项目类型：Web应用</p>
+                <p>所属单位：哈工大郑州研究院双创基地</p>
+            </div>
+            <img src="https://via.placeholder.com/1000x500" alt="项目主图" class="project-image">
+        </article>
+
+        <div class="project-content">
+            <section class="section">
+                <h2 class="section-title">项目概述</h2>
+                <div class="section-content">
+                    <p>这里是项目的详细介绍，可以包含项目的背景、目标和意义等内容。详细描述项目的核心价值和创新点。</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">主要功能</h2>
+                <div class="section-content">
+                    <ul class="feature-list">
+                        <li>功能特点一：详细描述该功能的具体实现和优势</li>
+                        <li>功能特点二：详细描述该功能的具体实现和优势</li>
+                        <li>功能特点三：详细描述该功能的具体实现和优势</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">技术栈</h2>
+                <div class="section-content">
+                    <p>项目使用的主要技术和框架：</p>
+                    <ul class="feature-list">
+                        <li>前端：HTML5, CSS3, JavaScript</li>
+                        <li>后端：Node.js, Express</li>
+                        <li>数据库：MongoDB</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">项目成果</h2>
+                <div class="section-content">
+                    <p>描述项目取得的成果和影响，可以包含具体的数据和用户反馈。</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">团队介绍</h2>
+                <div class="section-content">
+                    <p>项目团队成员来自哈工大郑州研究院双创基地，包括：</p>
+                    <ul class="feature-list">
+                        <li>项目负责人：XXX（教授/研究员）</li>
+                        <li>技术负责人：XXX（博士/硕士）</li>
+                        <li>开发团队：XXX等</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>哈工大郑州研究院双创基地</h3>
+            <p>地址：河南省郑州市高新区科学大道100号</p>
+            <p>电话：0371-XXXXXXXX</p>
+            <p>邮箱：innovation@hit.edu.cn</p>
+            <p>© 2024 哈工大郑州研究院双创基地 版权所有</p>
+        </div>
+    </footer>
+</body>
+</html> 

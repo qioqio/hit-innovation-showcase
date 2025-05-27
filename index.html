@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈工大郑州研究院双创基地 - 项目展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #00529b, #003366);
+            margin-bottom: 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                        linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
+            background-size: 60px 60px;
+            animation: headerAnimation 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes headerAnimation {
+            0% { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+        }
+
+        h1 {
+            font-size: 3em;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 20px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            aspect-ratio: 4/4;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 65%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-info {
+            padding: 15px;
+            background: white;
+            position: relative;
+            height: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-title {
+            font-size: 1.1em;
+            margin-bottom: 6px;
+            color: #2c3e50;
+            transition: color 0.3s ease;
+            line-height: 1.3;
+        }
+
+        .project-description {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.4;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        @media (max-width: 1200px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 添加滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* 添加新的样式 */
+        .logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .institute-name {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInDown 1s ease-out 0.2s both;
+        }
+
+        .institute-subtitle {
+            font-size: 1.2em;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out 0.4s both;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #00529b, #003366);
+            color: white;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* 修改分页样式 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+            gap: 15px;
+        }
+
+        .page-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: white;
+            color: #00529b;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 1em;
+        }
+
+        .page-link:hover {
+            background: #00529b;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .page-link.active {
+            background: #00529b;
+            color: white;
+        }
+
+        .page-link.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-link.disabled:hover {
+            background: white;
+            color: #00529b;
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="https://www.hit.edu.cn/_upload/site/00/05/5/logo.png" alt="哈工大校徽" class="logo">
+            <h1 class="institute-name">哈工大郑州研究院双创基地</h1>
+            <p class="institute-subtitle">创新引领未来 · 创业成就梦想</p>
+            <p>探索我们的精彩项目</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="projects-grid">
+            <!-- 第一页项目 (1-6) -->
+            <a href="project-detail.html?id=1" class="project-card">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="智能机器人项目" class="project-image">
+                <div class="project-info">
+                    <h2 class="project-title">智能机器人控制系统</h2>
+                    <p class="project-description">基于深度学习的工业机器人控制系统，实现高精度定位和自适应控制。</p>
+                </div>
+            </a>
+
+            <a href="project-detail.html?id=2" class="project-card">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="新能源项目" class="project-image">
+                <div class="project-info">
+                    <h2 class="project-title">新能源储能系统</h2>
+                    <p class="project-description">新型储能技术研发，提高能源利用效率，降低碳排放。</p>
+                </div>
+            </a>
+
+            <a href="project-detail.html?id=3" class="project-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="人工智能项目" class="project-image">
+                <div class="project-info">
+                    <h2 class="project-title">AI医疗诊断系统</h2>
+                    <p class="project-description">基于机器学习的医疗影像诊断系统，提高诊断准确率。</p>
+                </div>
+            </a>
+
+            <a href="project-detail.html?id=4" class="project-card">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="智能制造项目" class="project-image">
+                <div class="project-info">
+                    <h2 class="project-title">智能制造平台</h2>
+                    <p class="project-description">工业4.0智能制造解决方案，实现生产全流程数字化管理。</p>
+                </div>
+            </a>
+
+            <a href="project-detail.html?id=5" class="project-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="智慧城市项目" class="project-image">
+                <div class="project-info">
+                    <h2 class="project-title">智慧城市管理系统</h2>
+                    <p class="project-description">城市智能化管理平台，提升城市运行效率。</p>
+                </div>
+            </a>
+
+            <a href="project-detail.html?id=6" class="project-card">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="物联网项目" class="project-image">
+                <div class="project-info">
+                    <h2 class="project-title">物联网监控系统</h2>
+                    <p class="project-description">基于物联网技术的智能监控系统，实现远程实时监控。</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- 分页导航 -->
+        <div class="pagination">
+            <a href="?page=1" class="page-link active">1</a>
+            <a href="?page=2" class="page-link">2</a>
+            <a href="?page=3" class="page-link">3</a>
+            <a href="?page=4" class="page-link">4</a>
+            <a href="?page=5" class="page-link">5</a>
+            <a href="?page=6" class="page-link">6</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>哈工大郑州研究院双创基地</h3>
+            <p>地址：河南省郑州市高新区科学大道100号</p>
+            <p>电话：0371-XXXXXXXX</p>
+            <p>邮箱：innovation@hit.edu.cn</p>
+            <p>© 2024 哈工大郑州研究院双创基地 版权所有</p>
+        </div>
+    </footer>
+
+    <script>
+        // 获取URL参数
+        function getUrlParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // 当前页码
+        const currentPage = parseInt(getUrlParam('page')) || 1;
+
+        // 每页显示的项目数
+        const projectsPerPage = 6;
+
+        // 更新分页按钮状态
+        const pageLinks = document.querySelectorAll('.page-link');
+        pageLinks.forEach(link => {
+            const pageNum = parseInt(link.textContent);
+            if (pageNum === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+
+        // 根据页码显示对应内容
+        if (currentPage > 1) {
+            const projectsGrid = document.querySelector('.projects-grid');
+            let projectsHTML = '';
+
+            // 第二页项目 (7-12)
+            if (currentPage === 2) {
+                projectsHTML = `
+                    <a href="project-detail.html?id=7" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="区块链项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">区块链溯源平台</h2>
+                            <p class="project-description">基于区块链技术的产品溯源系统，确保数据真实可靠。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=8" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="大数据项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">大数据分析平台</h2>
+                            <p class="project-description">企业级大数据分析解决方案，助力数据驱动决策。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=9" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="云计算项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">云计算服务平台</h2>
+                            <p class="project-description">企业级云计算解决方案，提供弹性计算资源。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=10" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="5G项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">5G通信技术</h2>
+                            <p class="project-description">新一代移动通信技术研发，推动产业升级。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=11" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="AR项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">AR/VR应用开发</h2>
+                            <p class="project-description">增强现实与虚拟现实技术应用，打造沉浸式体验。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=12" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="智能家居项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智能家居系统</h2>
+                            <p class="project-description">全屋智能控制系统，打造智慧生活空间。</p>
+                        </div>
+                    </a>
+                `;
+            }
+            // 第三页项目 (13-18)
+            else if (currentPage === 3) {
+                projectsHTML = `
+                    <a href="project-detail.html?id=13" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="无人机项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">无人机控制系统</h2>
+                            <p class="project-description">智能无人机研发，应用于农业、测绘等领域。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=14" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="生物技术项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">生物技术研发</h2>
+                            <p class="project-description">前沿生物技术研究，推动医疗健康创新。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=15" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="新材料项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">新材料研发</h2>
+                            <p class="project-description">新型材料技术研究，推动产业升级。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=16" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="环保项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">环保技术研发</h2>
+                            <p class="project-description">绿色环保技术研究，助力可持续发展。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=17" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="量子计算项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">量子计算研究</h2>
+                            <p class="project-description">量子计算技术研发，突破计算能力瓶颈。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=18" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="脑机接口项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">脑机接口技术</h2>
+                            <p class="project-description">人机交互新技术研究，实现思维控制。</p>
+                        </div>
+                    </a>
+                `;
+            }
+            // 第四页项目 (19-24)
+            else if (currentPage === 4) {
+                projectsHTML = `
+                    <a href="project-detail.html?id=19" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="基因编辑项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">基因编辑技术</h2>
+                            <p class="project-description">基因编辑技术研究，推动医疗创新。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=20" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="太空技术项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">太空技术研发</h2>
+                            <p class="project-description">航天技术研究，推动太空探索。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=21" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="人工智能项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">AI芯片研发</h2>
+                            <p class="project-description">专用AI芯片设计，提升计算效率。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=22" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="网络安全项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">网络安全技术</h2>
+                            <p class="project-description">网络安全防护技术研究，保障数据安全。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=23" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="数字孪生项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">数字孪生技术</h2>
+                            <p class="project-description">数字孪生技术研究，实现虚实结合。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=24" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="边缘计算项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">边缘计算技术</h2>
+                            <p class="project-description">边缘计算技术研究，提升响应速度。</p>
+                        </div>
+                    </a>
+                `;
+            }
+            // 第五页项目 (25-30)
+            else if (currentPage === 5) {
+                projectsHTML = `
+                    <a href="project-detail.html?id=25" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="智能交通项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智能交通系统</h2>
+                            <p class="project-description">智能交通技术研究，提升出行效率。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=26" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="智慧农业项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智慧农业技术</h2>
+                            <p class="project-description">农业智能化技术研究，提升生产效率。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=27" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="智能制造项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智能制造技术</h2>
+                            <p class="project-description">智能制造技术研究，推动产业升级。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=28" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="智慧医疗项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智慧医疗技术</h2>
+                            <p class="project-description">医疗智能化技术研究，提升服务质量。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=29" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="智慧教育项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智慧教育技术</h2>
+                            <p class="project-description">教育智能化技术研究，提升学习效果。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=30" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="智慧金融项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智慧金融技术</h2>
+                            <p class="project-description">金融智能化技术研究，提升服务效率。</p>
+                        </div>
+                    </a>
+                `;
+            }
+            // 第六页项目 (31-36)
+            else if (currentPage === 6) {
+                projectsHTML = `
+                    <a href="project-detail.html?id=31" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="智慧物流项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智慧物流技术</h2>
+                            <p class="project-description">物流智能化技术研究，提升配送效率。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=32" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="智慧能源项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智慧能源技术</h2>
+                            <p class="project-description">能源智能化技术研究，提升利用效率。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=33" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="智慧建筑项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智慧建筑技术</h2>
+                            <p class="project-description">建筑智能化技术研究，提升居住体验。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=34" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="智慧环保项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智慧环保技术</h2>
+                            <p class="project-description">环保智能化技术研究，提升治理效果。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=35" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="智慧安防项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智慧安防技术</h2>
+                            <p class="project-description">安防智能化技术研究，提升安全水平。</p>
+                        </div>
+                    </a>
+
+                    <a href="project-detail.html?id=36" class="project-card">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="智慧文旅项目" class="project-image">
+                        <div class="project-info">
+                            <h2 class="project-title">智慧文旅技术</h2>
+                            <p class="project-description">文旅智能化技术研究，提升游客体验。</p>
+                        </div>
+                    </a>
+                `;
+            }
+
+            projectsGrid.innerHTML = projectsHTML;
+        }
+    </script>
+</body>
+</html>
