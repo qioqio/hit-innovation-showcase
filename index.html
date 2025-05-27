@@ -44,6 +44,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 40px;
+            position: relative;
         }
 
         .logo {
@@ -92,6 +93,36 @@
 
         .nav-link:hover::after {
             width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
         }
 
         /* 横幅轮播样式 */
@@ -416,6 +447,148 @@
             
             .banner-title {
                 font-size: 2em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 80px 20px 20px;
+                transition: all 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+                margin: 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-link {
+                font-size: 1.2em;
+                padding: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .logo {
+                max-width: 200px;
+            }
+
+            .banner {
+                margin-top: 100px;
+                height: 400px;
+            }
+
+            .banner-content {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .banner-title {
+                font-size: 2em;
+            }
+
+            .banner-description {
+                font-size: 1.1em;
+            }
+
+            .banner-arrow {
+                width: 40px;
+                height: 40px;
+            }
+
+            .banner-arrow.prev {
+                left: 10px;
+            }
+
+            .banner-arrow.next {
+                right: 10px;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .section-description {
+                font-size: 1.1em;
+            }
+
+            .pagination {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .page-link {
+                padding: 8px 16px;
+                font-size: 1em;
+            }
+
+            .footer {
+                padding: 30px 0 10px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .footer-section {
+                padding: 0 10px;
+                text-align: center;
+            }
+
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            .logo {
+                max-width: 150px;
+            }
+
+            .banner {
+                height: 300px;
+            }
+
+            .banner-title {
+                font-size: 1.8em;
+            }
+
+            .banner-description {
+                font-size: 1em;
+            }
+
+            .project-card {
+                height: 300px;
+            }
+
+            .project-title {
+                font-size: 1.5em;
+            }
+
+            .project-description {
+                font-size: 1em;
             }
         }
 
@@ -1267,6 +1440,37 @@
 
             // 初始化显示第一页
             showPage(1);
+        });
+
+        // 移动端菜单
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.createElement('div');
+            menuBtn.className = 'mobile-menu-btn';
+            menuBtn.innerHTML = '<span></span><span></span><span></span>';
+            document.querySelector('.nav-container').appendChild(menuBtn);
+
+            const navLinks = document.querySelector('.nav-links');
+            
+            menuBtn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // 点击导航链接时关闭菜单
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // 点击页面其他区域关闭菜单
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-container')) {
+                    menuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
         });
     </script>
 </body>

@@ -380,17 +380,78 @@
         }
 
         @media (max-width: 768px) {
-            .shop-container {
-                height: 700px;
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 80px 20px 20px;
+                transition: all 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+                margin: 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-link {
+                font-size: 1.2em;
+                padding: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .logo {
+                max-width: 200px;
             }
 
             .purchase-container {
                 padding: 20px;
-                margin-top: 120px;
+                margin-top: 100px;
             }
 
-            .nav-links {
-                display: none;
+            .taobao-container {
+                height: 600px;
+            }
+
+            .shop-tip {
+                font-size: 1em;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+
+            .logo {
+                max-width: 150px;
+            }
+
+            .purchase-container {
+                padding: 15px;
+            }
+
+            .taobao-container {
+                height: 500px;
+            }
+
+            .shop-tip {
+                font-size: 0.9em;
             }
         }
     </style>
@@ -468,6 +529,37 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        // 移动端菜单
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.createElement('div');
+            menuBtn.className = 'mobile-menu-btn';
+            menuBtn.innerHTML = '<span></span><span></span><span></span>';
+            document.querySelector('.nav-container').appendChild(menuBtn);
+
+            const navLinks = document.querySelector('.nav-links');
+            
+            menuBtn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // 点击导航链接时关闭菜单
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // 点击页面其他区域关闭菜单
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-container')) {
+                    menuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
         });
     </script>
 </body>
