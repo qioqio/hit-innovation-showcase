@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目介绍 - 哈工大郑州研究院双创基地</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            max-width: 75px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #00529b;
+            background: rgba(0, 82, 155, 0.1);
+        }
+
+        /* 页面内容样式 */
+        .page-header {
+            margin-top: 80px;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #00529b, #003366);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                        linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
+            background-size: 60px 60px;
+            animation: headerAnimation 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes headerAnimation {
+            0% { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+        }
+
+        .page-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .page-description {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .projects-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .project-category {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .project-category.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-title {
+            font-size: 1.8em;
+            color: #00529b;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #00529b;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00529b;
+            transition: width 0.8s ease-out;
+        }
+
+        .project-category.visible .category-title::after {
+            width: 100%;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .project-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            position: relative;
+        }
+
+        .project-category.visible .project-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-category.visible .project-item:nth-child(1) {
+            transition-delay: 0.2s;
+        }
+
+        .project-category.visible .project-item:nth-child(2) {
+            transition-delay: 0.4s;
+        }
+
+        .project-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .project-item:hover .project-image {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4), transparent);
+            color: white;
+            transform: translateY(0);
+            transition: all 0.4s ease;
+        }
+
+        .project-name {
+            font-size: 1.4em;
+            color: white;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .project-description {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .project-item:hover .project-features {
+            opacity: 1;
+            transform: translateY(0);
+            max-height: 200px;
+        }
+
+        .project-features li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9em;
+        }
+
+        .project-features li::before {
+            content: "•";
+            color: #00529b;
+            position: absolute;
+            left: 0;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #00529b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .project-item:hover .project-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-link:hover {
+            background: #003366;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .project-link:hover::before {
+            left: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .project-content {
+                padding: 15px;
+            }
+
+            .project-name {
+                font-size: 1.2em;
+            }
+
+            .project-description {
+                font-size: 0.9em;
+            }
+
+            .project-features {
+                display: none;
+            }
+
+            .project-link {
+                width: 100%;
+                text-align: center;
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 添加动画关键帧 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* 添加导航栏动画 */
+        .navbar {
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #00529b;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* 移动端导航栏样式 */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: #00529b;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: white;
+            padding: 80px 20px 20px;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .mobile-nav-link {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.2em;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-link:hover {
+            color: #00529b;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* 移动端响应式样式 */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page-header {
+                padding: 40px 20px;
+            }
+
+            .page-title {
+                font-size: 2em;
+            }
+
+            .page-description {
+                font-size: 1em;
+            }
+
+            .projects-section {
+                padding: 20px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .project-item {
+                margin-bottom: 20px;
+            }
+
+            .project-image {
+                height: 200px;
+            }
+
+            .project-content {
+                padding: 15px;
+            }
+
+            .project-name {
+                font-size: 1.2em;
+            }
+
+            .project-description {
+                font-size: 0.9em;
+            }
+
+            .project-features {
+                font-size: 0.9em;
+            }
+
+            .project-link {
+                width: 100%;
+                text-align: center;
+            }
+
+            /* 优化移动端触摸体验 */
+            .project-item {
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .project-link {
+                padding: 12px 20px;
+            }
+
+            /* 优化移动端滚动 */
+            .projects-section {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* 小屏幕设备优化 */
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.8em;
+            }
+
+            .category-title {
+                font-size: 1.5em;
+            }
+
+            .project-image {
+                height: 180px;
+            }
+        }
+
+        /* 横幅轮播样式 */
+        .banner {
+            margin-top: 80px;
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .banner-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .banner-slide.active {
+            opacity: 1;
+        }
+
+        .banner-content {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .banner-title {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .banner-description {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease 0.2s;
+        }
+
+        .banner-slide.active .banner-title,
+        .banner-slide.active .banner-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 添加箭头控制样式 */
+        .banner-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .banner:hover .banner-arrow {
+            opacity: 1;
+        }
+
+        .banner-arrow:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .banner-arrow.prev {
+            left: 20px;
+        }
+
+        .banner-arrow.next {
+            right: 20px;
+        }
+
+        .banner-arrow::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-top: 2px solid white;
+            border-right: 2px solid white;
+            transform: rotate(-135deg);
+        }
+
+        .banner-arrow.next::before {
+            transform: rotate(45deg);
+        }
+
+        .banner-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 2;
+        }
+
+        .banner-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .banner-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .banner {
+                height: 400px;
+            }
+
+            .banner-arrow {
+                width: 40px;
+                height: 40px;
+                opacity: 0.7;
+            }
+
+            .banner-arrow.prev {
+                left: 10px;
+            }
+
+            .banner-arrow.next {
+                right: 10px;
+            }
+
+            .banner-title {
+                font-size: 2em;
+            }
+
+            .banner-description {
+                font-size: 1em;
+            }
+        }
+
+        /* 添加底部栏样式 */
+        .footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 2px;
+            background: #00529b;
+        }
+
+        .footer-section p {
+            color: #999;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #00529b;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+            color: #666;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #999;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #00529b;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <img src="images/hit-logo.png" alt="哈工大校徽" class="logo">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="projects.html" class="nav-link">项目介绍</a>
+                <a href="products.html" class="nav-link">产品介绍</a>
+                <a href="purchase.html" class="nav-link">产品购买</a>
+                <a href="join.html" class="nav-link">项目入驻</a>
+                <a href="contact.html" class="nav-link">项目咨询</a>
+            </div>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 移动端导航菜单 -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-links">
+            <a href="index.html" class="mobile-nav-link">首页</a>
+            <a href="projects.html" class="mobile-nav-link">项目介绍</a>
+            <a href="products.html" class="mobile-nav-link">产品介绍</a>
+            <a href="purchase.html" class="mobile-nav-link">产品购买</a>
+            <a href="join.html" class="mobile-nav-link">项目入驻</a>
+            <a href="contact.html" class="mobile-nav-link">项目咨询</a>
+        </div>
+    </div>
+
+    <!-- 遮罩层 -->
+    <div class="overlay"></div>
+
+    <!-- 页面头部 -->
+    <header class="page-header">
+        <h1 class="page-title">项目介绍</h1>
+        <p class="page-description">探索哈工大郑州研究院双创基地的创新项目，了解前沿科技发展</p>
+    </header>
+
+    <!-- 项目展示区域 -->
+    <main class="projects-section">
+        <!-- 人工智能类项目 -->
+        <section class="project-category">
+            <h2 class="category-title">人工智能类项目</h2>
+            <div class="project-grid">
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="智能机器人项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">智能机器人控制系统</h3>
+                        <p class="project-description">基于深度学习的工业机器人控制系统，实现高精度定位和自适应控制。</p>
+                        <ul class="project-features">
+                            <li>深度学习算法优化</li>
+                            <li>实时自适应控制</li>
+                            <li>高精度定位系统</li>
+                            <li>多场景应用支持</li>
+                        </ul>
+                        <a href="project-detail.html?id=1" class="project-link">查看详情</a>
+                    </div>
+                </article>
+
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="AI医疗项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">AI医疗诊断系统</h3>
+                        <p class="project-description">基于机器学习的医疗影像诊断系统，提高诊断准确率。</p>
+                        <ul class="project-features">
+                            <li>医学影像分析</li>
+                            <li>智能诊断辅助</li>
+                            <li>多模态数据融合</li>
+                            <li>远程会诊支持</li>
+                        </ul>
+                        <a href="project-detail.html?id=3" class="project-link">查看详情</a>
+                    </div>
+                </article>
+
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="智能交通项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">智能交通管理系统</h3>
+                        <p class="project-description">基于AI的智能交通管理系统，优化城市交通流量。</p>
+                        <ul class="project-features">
+                            <li>实时交通监控</li>
+                            <li>智能信号控制</li>
+                            <li>交通预测分析</li>
+                            <li>应急响应系统</li>
+                        </ul>
+                        <a href="project-detail.html?id=4" class="project-link">查看详情</a>
+                    </div>
+                </article>
+
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="智能安防项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">智能安防监控系统</h3>
+                        <p class="project-description">基于计算机视觉的智能安防系统，提供全方位安全保障。</p>
+                        <ul class="project-features">
+                            <li>人脸识别技术</li>
+                            <li>行为分析系统</li>
+                            <li>异常行为检测</li>
+                            <li>实时预警机制</li>
+                        </ul>
+                        <a href="project-detail.html?id=5" class="project-link">查看详情</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 新能源类项目 -->
+        <section class="project-category">
+            <h2 class="category-title">新能源类项目</h2>
+            <div class="project-grid">
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="新能源项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">新能源储能系统</h3>
+                        <p class="project-description">新型储能技术研发，提高能源利用效率，降低碳排放。</p>
+                        <ul class="project-features">
+                            <li>高效储能技术</li>
+                            <li>智能调度系统</li>
+                            <li>绿色能源管理</li>
+                            <li>节能减排方案</li>
+                        </ul>
+                        <a href="project-detail.html?id=2" class="project-link">查看详情</a>
+                    </div>
+                </article>
+
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="智慧能源项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">智慧能源技术</h3>
+                        <p class="project-description">能源智能化技术研究，提升利用效率。</p>
+                        <ul class="project-features">
+                            <li>智能电网管理</li>
+                            <li>能源优化调度</li>
+                            <li>分布式能源系统</li>
+                            <li>能源大数据分析</li>
+                        </ul>
+                        <a href="project-detail.html?id=32" class="project-link">查看详情</a>
+                    </div>
+                </article>
+
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="光伏发电项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">智能光伏发电系统</h3>
+                        <p class="project-description">新一代光伏发电技术，提高发电效率。</p>
+                        <ul class="project-features">
+                            <li>高效光伏组件</li>
+                            <li>智能跟踪系统</li>
+                            <li>发电效率优化</li>
+                            <li>智能运维管理</li>
+                        </ul>
+                        <a href="project-detail.html?id=6" class="project-link">查看详情</a>
+                    </div>
+                </article>
+
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="氢能源项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">氢能源技术研发</h3>
+                        <p class="project-description">氢能源制备与利用技术研究。</p>
+                        <ul class="project-features">
+                            <li>制氢技术优化</li>
+                            <li>储氢系统研发</li>
+                            <li>氢燃料电池</li>
+                            <li>应用场景拓展</li>
+                        </ul>
+                        <a href="project-detail.html?id=7" class="project-link">查看详情</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 智能制造类项目 -->
+        <section class="project-category">
+            <h2 class="category-title">智能制造类项目</h2>
+            <div class="project-grid">
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="智能工厂项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">智能工厂解决方案</h3>
+                        <p class="project-description">打造数字化智能工厂，提升生产效率。</p>
+                        <ul class="project-features">
+                            <li>生产流程优化</li>
+                            <li>设备智能监控</li>
+                            <li>质量控制系统</li>
+                            <li>数据分析平台</li>
+                        </ul>
+                        <a href="project-detail.html?id=8" class="project-link">查看详情</a>
+                    </div>
+                </article>
+
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="工业物联网项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">工业物联网平台</h3>
+                        <p class="project-description">构建工业物联网生态系统。</p>
+                        <ul class="project-features">
+                            <li>设备互联互通</li>
+                            <li>数据采集分析</li>
+                            <li>远程监控管理</li>
+                            <li>预测性维护</li>
+                        </ul>
+                        <a href="project-detail.html?id=9" class="project-link">查看详情</a>
+                    </div>
+                </article>
+
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="3D打印项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">智能3D打印系统</h3>
+                        <p class="project-description">新一代智能3D打印技术研发。</p>
+                        <ul class="project-features">
+                            <li>高精度打印</li>
+                            <li>多材料打印</li>
+                            <li>智能控制系统</li>
+                            <li>应用场景拓展</li>
+                        </ul>
+                        <a href="project-detail.html?id=10" class="project-link">查看详情</a>
+                    </div>
+                </article>
+
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="数字孪生项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">数字孪生技术</h3>
+                        <p class="project-description">构建物理实体的数字映射。</p>
+                        <ul class="project-features">
+                            <li>实时数据同步</li>
+                            <li>虚拟仿真分析</li>
+                            <li>预测性维护</li>
+                            <li>决策支持系统</li>
+                        </ul>
+                        <a href="project-detail.html?id=11" class="project-link">查看详情</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 新材料类项目 -->
+        <section class="project-category">
+            <h2 class="category-title">新材料类项目</h2>
+            <div class="project-grid">
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="石墨烯项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">石墨烯材料应用</h3>
+                        <p class="project-description">石墨烯材料研发与应用研究。</p>
+                        <ul class="project-features">
+                            <li>材料制备工艺</li>
+                            <li>性能优化研究</li>
+                            <li>应用场景开发</li>
+                            <li>产业化推广</li>
+                        </ul>
+                        <a href="project-detail.html?id=12" class="project-link">查看详情</a>
+                    </div>
+                </article>
+
+                <article class="project-item">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="复合材料项目" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">新型复合材料</h3>
+                        <p class="project-description">高性能复合材料研发与应用。</p>
+                        <ul class="project-features">
+                            <li>材料配方优化</li>
+                            <li>性能测试分析</li>
+                            <li>工艺改进研究</li>
+                            <li>应用领域拓展</li>
+                        </ul>
+                        <a href="project-detail.html?id=13" class="project-link">查看详情</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- 横幅轮播 -->
+    <div class="banner">
+        <div class="banner-slide active" style="background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?w=1600&h=900&fit=crop')">
+            <div class="banner-content">
+                <h2 class="banner-title">智能机器人控制系统</h2>
+                <p class="banner-description">基于深度学习的工业机器人控制系统，实现高精度定位和自适应控制</p>
+            </div>
+        </div>
+        <div class="banner-slide" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&h=900&fit=crop')">
+            <div class="banner-content">
+                <h2 class="banner-title">新能源储能系统</h2>
+                <p class="banner-description">新型储能技术研发，提高能源利用效率，降低碳排放</p>
+            </div>
+        </div>
+        <div class="banner-slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&h=900&fit=crop')">
+            <div class="banner-content">
+                <h2 class="banner-title">AI医疗诊断系统</h2>
+                <p class="banner-description">基于机器学习的医疗影像诊断系统，提高诊断准确率</p>
+            </div>
+        </div>
+        <div class="banner-arrow prev"></div>
+        <div class="banner-arrow next"></div>
+        <div class="banner-controls">
+            <div class="banner-dot active"></div>
+            <div class="banner-dot"></div>
+            <div class="banner-dot"></div>
+        </div>
+    </div>
+
+    <!-- 添加底部栏 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>关于我们</h3>
+                <p>哈工大郑州研究院双创基地致力于推动科技创新，培养创新创业人才，促进科技成果转化。</p>
+                <div class="social-links">
+                    <a href="#" title="微信"><i class="fab fa-weixin"></i></a>
+                    <a href="#" title="微博"><i class="fab fa-weibo"></i></a>
+                    <a href="#" title="抖音"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>快速链接</h3>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="projects.html">项目介绍</a></li>
+                    <li><a href="products.html">产品介绍</a></li>
+                    <li><a href="purchase.html">产品购买</a></li>
+                    <li><a href="join.html">项目入驻</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>联系方式</h3>
+                <ul>
+                    <li>地址：河南省郑州市高新区</li>
+                    <li>电话：0371-XXXXXXXX</li>
+                    <li>邮箱：contact@hit-zz.com</li>
+                    <li>工作时间：周一至周五 9:00-17:00</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>关注我们</h3>
+                <p>扫描下方二维码，关注我们的官方公众号，获取最新资讯。</p>
+                <img src="images/qrcode.png" alt="公众号二维码" style="max-width: 120px; margin-top: 10px;">
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 哈工大郑州研究院双创基地. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 添加滚动显示动画
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // 观察所有项目类别
+        document.querySelectorAll('.project-category').forEach(category => {
+            observer.observe(category);
+        });
+
+        // 添加页面加载动画
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // 移动端菜单控制
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const overlay = document.querySelector('.overlay');
+
+        function toggleMobileMenu() {
+            mobileMenuBtn.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        overlay.addEventListener('click', toggleMobileMenu);
+
+        // 移动端导航链接点击后关闭菜单
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileNav.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // 优化移动端滚动性能
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (!scrollTimeout) {
+                scrollTimeout = setTimeout(function() {
+                    scrollTimeout = null;
+                    // 滚动时的操作
+                    const navbar = document.querySelector('.navbar');
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                }, 100);
+            }
+        }, { passive: true });
+
+        // 优化移动端触摸反馈
+        document.querySelectorAll('.project-item').forEach(item => {
+            item.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            }, { passive: true });
+
+            item.addEventListener('touchend', function() {
+                this.style.transform = '';
+            }, { passive: true });
+        });
+
+        // 横幅轮播
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.banner-slide');
+        const dots = document.querySelectorAll('.banner-dot');
+        const prevArrow = document.querySelector('.banner-arrow.prev');
+        const nextArrow = document.querySelector('.banner-arrow.next');
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function startSlideInterval() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopSlideInterval() {
+            clearInterval(slideInterval);
+        }
+
+        // 自动轮播
+        startSlideInterval();
+
+        // 点击箭头切换轮播
+        prevArrow.addEventListener('click', () => {
+            stopSlideInterval();
+            prevSlide();
+            startSlideInterval();
+        });
+
+        nextArrow.addEventListener('click', () => {
+            stopSlideInterval();
+            nextSlide();
+            startSlideInterval();
+        });
+
+        // 点击圆点切换轮播
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                stopSlideInterval();
+                currentSlide = index;
+                showSlide(currentSlide);
+                startSlideInterval();
+            });
+        });
+
+        // 鼠标悬停时暂停自动轮播
+        const banner = document.querySelector('.banner');
+        banner.addEventListener('mouseenter', stopSlideInterval);
+        banner.addEventListener('mouseleave', startSlideInterval);
+
+        // 触摸滑动支持
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        banner.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopSlideInterval();
+        }, { passive: true });
+
+        banner.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startSlideInterval();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                nextSlide();
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                prevSlide();
+            }
+        }
+    </script>
+</body>
+</html> 
