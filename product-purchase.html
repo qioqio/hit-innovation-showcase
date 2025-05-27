@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>哈工大郑州研究院双创基地 - 项目合作</title>
+    <title>哈工大郑州研究院双创基地 - 产品购买</title>
     <style>
         * {
             margin: 0;
@@ -94,186 +94,80 @@
             width: 100%;
         }
 
-        /* 联系表单样式 */
-        .contact-container {
+        /* 产品购买页面样式 */
+        .purchase-container {
             max-width: 1800px;
             margin: 150px auto 40px;
             padding: 40px;
             background: white;
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
-        .contact-title {
+        .purchase-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .purchase-title {
             text-align: center;
             color: #00529b;
             font-size: 2.5em;
             margin-bottom: 30px;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1.5fr 2.5fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .contact-info {
-            padding: 30px;
-            background: rgba(0, 82, 155, 0.05);
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            height: fit-content;
-        }
-
-        .contact-info:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
-
-        .contact-info h2 {
-            color: #00529b;
-            font-size: 1.8em;
-            margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
         }
 
-        .contact-info h2::after {
+        .purchase-title::after {
             content: '';
             position: absolute;
-            left: 0;
+            left: 50%;
             bottom: 0;
             width: 60px;
             height: 3px;
             background: #00529b;
             transition: width 0.3s ease;
+            transform: translateX(-50%);
         }
 
-        .contact-info:hover h2::after {
+        .purchase-container:hover .purchase-title::after {
             width: 100px;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
+        .shop-tip {
+            text-align: center;
             margin: 20px 0;
             padding: 15px;
-            background: white;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: #00529b;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: white;
-            font-size: 1.2em;
-        }
-
-        .contact-text {
-            flex: 1;
-        }
-
-        .contact-text h3 {
-            color: #333;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-        }
-
-        .contact-text p {
+            background: rgba(0, 82, 155, 0.05);
+            border-radius: 8px;
             color: #666;
-            font-size: 1em;
         }
 
-        .qr-code {
-            width: 150px;
-            height: 150px;
-            margin: 15px auto;
-            padding: 10px;
-            background: white;
+        .shop-tip a {
+            color: #00529b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .shop-tip a:hover {
+            color: #003366;
+            text-decoration: underline;
+        }
+
+        .shop-container {
+            width: 100%;
+            height: 900px;
+            border: none;
             border-radius: 10px;
+            overflow: hidden;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
-        .qr-code:hover {
-            transform: scale(1.05);
+        .shop-container:hover {
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-
-        .qr-code img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .contact-form {
-            display: grid;
-            gap: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-group label {
-            font-size: 1.1em;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #00529b;
-            box-shadow: 0 0 0 2px rgba(0,82,155,0.1);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: #00529b;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .submit-btn:hover {
-            background: #003366;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         /* 页脚样式 */
@@ -478,143 +372,25 @@
             color: rgba(255,255,255,0.9);
         }
 
-        @media (max-width: 1200px) {
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
+        @media (max-width: 1800px) {
+            .purchase-container {
+                max-width: 95%;
+                margin: 150px auto 40px;
             }
         }
 
         @media (max-width: 768px) {
-            .footer {
-                padding: 30px 0 10px;
+            .shop-container {
+                height: 700px;
             }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            
-            .footer-section {
-                padding: 0 10px;
-            }
-            
-            .social-links {
-                justify-content: center;
+
+            .purchase-container {
+                padding: 20px;
+                margin-top: 120px;
             }
 
             .nav-links {
                 display: none;
-            }
-
-            .contact-container {
-                padding: 20px;
-                margin-top: 120px;
-            }
-        }
-
-        /* 腾讯表格样式 */
-        .tencent-sheet {
-            padding: 30px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .tencent-sheet:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-
-        .tencent-sheet h2 {
-            color: #00529b;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-            text-align: center;
-        }
-
-        .tencent-sheet h2::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            width: 60px;
-            height: 3px;
-            background: #00529b;
-            transition: width 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .tencent-sheet:hover h2::after {
-            width: 100px;
-        }
-
-        .sheet-container {
-            width: 100%;
-            height: 1000px;
-            border: none;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .sheet-container:hover {
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-
-        .form-tip {
-            text-align: center;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(0, 82, 155, 0.05);
-            border-radius: 8px;
-            color: #666;
-        }
-
-        .form-tip a {
-            color: #00529b;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .form-tip a:hover {
-            color: #003366;
-            text-decoration: underline;
-        }
-
-        @media (max-width: 1200px) {
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-info {
-                max-width: 1400px;
-                margin: 0 auto;
-            }
-            
-            .tencent-sheet {
-                max-width: 1600px;
-                margin: 0 auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sheet-container {
-                height: 800px;
-            }
-            
-            .contact-info {
-                max-width: 100%;
-            }
-            
-            .tencent-sheet {
-                max-width: 100%;
             }
         }
     </style>
@@ -627,6 +403,7 @@
             <div class="nav-links">
                 <a href="index.html#banner" class="nav-link">产品介绍</a>
                 <a href="index.html#projects" class="nav-link">项目介绍</a>
+
                 <a href="product-purchase.html" class="nav-link">产品购买</a>
                 <a href="contact.html" class="nav-link">项目合作</a>
                 <a href="project-entry.html" class="nav-link">项目入驻</a>
@@ -634,59 +411,17 @@
         </div>
     </nav>
 
-    <!-- 联系表单 -->
-    <div class="contact-container">
-        <h1 class="contact-title">项目合作</h1>
-        
-        <div class="contact-content">
-            <div class="contact-info">
-                <h2>联系方式</h2>
-                <div class="contact-item">
-                    <div class="contact-icon">📱</div>
-                    <div class="contact-text">
-                        <h3>微信</h3>
-                        <p>扫描下方二维码添加</p>
-                        <div class="qr-code">
-                            <img src="images/wechat-qr.jpg" alt="微信二维码">
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">📧</div>
-                    <div class="contact-text">
-                        <h3>邮箱</h3>
-                        <p>innovation@hit-zz.com</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div class="contact-text">
-                        <h3>办公电话</h3>
-                        <p>0371-88888888</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">🏢</div>
-                    <div class="contact-text">
-                        <h3>办公地址</h3>
-                        <p>河南省郑州市高新区科学大道100号</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 金山文档 -->
-            <div class="tencent-sheet">
-                <h2>项目合作申请表</h2>
-                <div class="form-tip">
-                    如果表单无法正常显示，请<a href="https://f.wps.cn/g/zHKX3qdy/" target="_blank">点击这里</a>直接访问表单
-                </div>
-                <iframe class="sheet-container" 
-                        src="https://f.wps.cn/g/zHKX3qdy/" 
-                        frameborder="0" 
-                        allowfullscreen>
-                </iframe>
-            </div>
+    <!-- 产品购买页面 -->
+    <div class="purchase-container">
+        <h1 class="purchase-title">产品购买</h1>
+        <div class="shop-tip">
+            如果店铺无法正常显示，请<a href="https://shop169542359.taobao.com/?spm=a21n57.shop_search.0.0.18d0523c8khzyo" target="_blank">点击这里</a>直接访问淘宝店铺
         </div>
+        <iframe class="shop-container" 
+                src="https://shop169542359.taobao.com/?spm=a21n57.shop_search.0.0.18d0523c8khzyo" 
+                frameborder="0" 
+                allowfullscreen>
+        </iframe>
     </div>
 
     <!-- 页脚区域 -->

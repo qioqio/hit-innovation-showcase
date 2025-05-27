@@ -19,119 +19,121 @@
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            margin-bottom: 20px;
-            color: #00529b;
-            text-decoration: none;
-            font-size: 0.95em;
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            padding: 8px 15px;
-            border-radius: 20px;
-            background: rgba(0, 82, 155, 0.1);
         }
 
-        .back-link:hover {
-            background: rgba(0, 82, 155, 0.2);
-            transform: translateX(-5px);
+        .navbar.scrolled {
+            padding: 15px 0;
+            background: white;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .logo {
+            max-width: 487px;
+            height: auto;
+            transition: all 0.3s ease;
+            padding: 5px;
+            background-color: transparent;
+            border-radius: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            margin-left: 60px;
+            background: transparent;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        .nav-link {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #00529b;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover {
+            color: #00529b;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* 项目详情样式 */
+        .project-container {
+            max-width: 1200px;
+            margin: 150px auto 40px;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .project-header {
-            background: #fff;
-            padding: 40px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            animation: slideIn 0.8s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         .project-title {
             font-size: 2.5em;
-            color: #2c3e50;
+            color: #00529b;
             margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 15px;
         }
 
-        .project-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #3498db, #2980b9);
-            border-radius: 2px;
-        }
-
-        .project-meta {
+        .project-subtitle {
+            font-size: 1.2em;
             color: #666;
-            margin-bottom: 25px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .project-meta p {
-            background: #f8f9fa;
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-size: 0.9em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .project-image {
-            width: 100%;
-            max-height: 500px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .project-image:hover {
-            transform: scale(1.01);
         }
 
         .project-content {
-            background: #fff;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            animation: slideIn 0.8s ease-out 0.2s both;
+            display: grid;
+            gap: 40px;
         }
 
-        .section {
-            margin-bottom: 40px;
+        .project-section {
             opacity: 0;
             transform: translateY(20px);
-            animation: fadeInUp 0.6s ease-out forwards;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        .section:nth-child(2) { animation-delay: 0.3s; }
-        .section:nth-child(3) { animation-delay: 0.4s; }
-        .section:nth-child(4) { animation-delay: 0.5s; }
+        .project-section:nth-child(1) { animation-delay: 0.2s; }
+        .project-section:nth-child(2) { animation-delay: 0.4s; }
+        .project-section:nth-child(3) { animation-delay: 0.6s; }
 
         @keyframes fadeInUp {
             from {
@@ -146,229 +148,549 @@
 
         .section-title {
             font-size: 1.8em;
-            color: #2c3e50;
+            color: #00529b;
             margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #eee;
             position: relative;
+            padding-bottom: 10px;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -2px;
             left: 0;
-            width: 50px;
-            height: 2px;
-            background: #3498db;
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background: #00529b;
+            transition: width 0.3s ease;
+        }
+
+        .project-section:hover .section-title::after {
+            width: 100px;
         }
 
         .section-content {
+            font-size: 1.1em;
             color: #444;
             line-height: 1.8;
         }
 
-        .feature-list {
-            list-style: none;
+        .project-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            display: none;
         }
 
-        .feature-list li {
-            margin-bottom: 15px;
-            padding-left: 25px;
+        .project-image.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .image-gallery {
             position: relative;
-            transition: transform 0.3s ease;
+            margin: 20px 0;
         }
 
-        .feature-list li:hover {
-            transform: translateX(5px);
-        }
-
-        .feature-list li:before {
-            content: "→";
-            color: #3498db;
+        .gallery-nav {
             position: absolute;
-            left: 0;
-            transition: transform 0.3s ease;
-        }
-
-        .feature-list li:hover:before {
-            transform: translateX(5px);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-
-            .project-header,
-            .project-content {
-                padding: 25px;
-            }
-
-            .project-title {
-                font-size: 2em;
-            }
-
-            .section-title {
-                font-size: 1.5em;
-            }
-        }
-
-        /* 添加滚动条样式 */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        /* 添加新的样式 */
-        .institute-header {
-            background: linear-gradient(135deg, #00529b, #003366);
-            padding: 20px 0;
-            margin-bottom: 30px;
-            color: white;
-            text-align: center;
-        }
-
-        .institute-header .container {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 82, 155, 0.8);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            border: none;
+            color: white;
+            font-size: 20px;
         }
 
-        .institute-logo {
-            max-width: 60px;
-            height: auto;
+        .gallery-nav:hover {
+            background: rgba(0, 82, 155, 1);
+            transform: translateY(-50%) scale(1.1);
         }
 
-        .institute-title {
-            font-size: 1.2em;
+        .gallery-nav.prev {
+            left: 20px;
+        }
+
+        .gallery-nav.next {
+            right: 20px;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .thumbnail-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .thumbnail {
+            width: 100px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            opacity: 0.7;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .thumbnail.active {
+            border-color: #00529b;
+            opacity: 1;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 30px;
+            color: #00529b;
+            text-decoration: none;
             font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 12px 25px;
+            background: rgba(0, 82, 155, 0.1);
+            border-radius: 25px;
+            font-size: 1.1em;
         }
 
+        .back-link:hover {
+            color: white;
+            background: #00529b;
+            transform: translateX(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .back-link::before {
+            content: '←';
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        /* 页脚样式 */
         .footer {
-            text-align: center;
-            padding: 40px 0;
             background: linear-gradient(135deg, #00529b, #003366);
             color: white;
-            margin-top: 60px;
+            padding: 40px 0 15px;
+            margin-top: 40px;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .footer-content {
-            max-width: 1000px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
         }
 
-        .footer p {
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 25px;
+        }
+
+        .footer-section {
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .footer-section:nth-child(1) { animation-delay: 0.2s; }
+        .footer-section:nth-child(2) { animation-delay: 0.4s; }
+        .footer-section:nth-child(3) { animation-delay: 0.6s; }
+
+        .footer-section h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        .footer-section:hover h3::after {
+            width: 60px;
+        }
+
+        .footer-section p {
+            margin: 8px 0;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section:hover p {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li {
             margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section ul li:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-section ul li a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-section ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .footer-section ul li a:hover::after {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .social-link {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .social-link:hover {
+            color: white;
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .social-link:hover::before {
+            width: 100%;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-top: 15px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.8s forwards;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.7);
+            margin: 5px 0;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .footer-bottom:hover p {
             color: rgba(255,255,255,0.9);
         }
 
-        .footer a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        @media (max-width: 1200px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
         }
 
-        .footer a:hover {
-            color: rgba(255,255,255,0.8);
+        @media (max-width: 768px) {
+            .footer {
+                padding: 30px 0 10px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .footer-section {
+                padding: 0 10px;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .project-container {
+                margin-top: 120px;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <header class="institute-header">
-        <div class="container">
-            <img src="images/hit-logo.png" alt="哈工大校徽" class="institute-logo">
-            <div class="institute-title">哈工大郑州研究院双创基地</div>
-        </div>
-    </header>
-
-    <div class="container">
-        <a href="index.html" class="back-link">← 返回项目列表</a>
-
-        <article class="project-header">
-            <h1 class="project-title">项目名称</h1>
-            <div class="project-meta">
-                <p>发布时间：2024年3月</p>
-                <p>项目类型：Web应用</p>
-                <p>所属单位：哈工大郑州研究院双创基地</p>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <img src="images/hit-logo.png" alt="哈工大校徽" class="logo">
+            <div class="nav-links">
+                <a href="index.html#banner" class="nav-link">产品介绍</a>
+                <a href="index.html#projects" class="nav-link">项目介绍</a>
+                <a href="product-purchase.html" class="nav-link">产品购买</a>
+                <a href="contact.html" class="nav-link">项目合作</a>
+                <a href="project-entry.html" class="nav-link">项目入驻</a>
             </div>
-            <img src="https://via.placeholder.com/1000x500" alt="项目主图" class="project-image">
-        </article>
+        </div>
+    </nav>
+
+    <!-- 项目详情 -->
+    <div class="project-container">
+        <div class="project-header">
+            <h1 class="project-title">智能机器人控制系统</h1>
+            <p class="project-subtitle">基于深度学习的工业机器人控制系统，实现高精度定位和自适应控制</p>
+        </div>
 
         <div class="project-content">
-            <section class="section">
+            <div class="project-section">
                 <h2 class="section-title">项目概述</h2>
                 <div class="section-content">
-                    <p>这里是项目的详细介绍，可以包含项目的背景、目标和意义等内容。详细描述项目的核心价值和创新点。</p>
+                    <p>本项目开发了一套基于深度学习的工业机器人控制系统，通过先进的算法和传感器技术，实现了机器人的高精度定位和自适应控制。系统具有以下特点：</p>
+                    <ul>
+                        <li>高精度定位：定位精度可达±0.1mm</li>
+                        <li>自适应控制：能够根据环境变化自动调整控制参数</li>
+                        <li>智能学习：通过深度学习不断优化控制策略</li>
+                        <li>远程监控：支持远程操作和状态监控</li>
+                    </ul>
+                    <div class="image-gallery">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="智能机器人项目" class="project-image active">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="智能机器人项目" class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="智能机器人项目" class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="智能机器人项目" class="project-image">
+                        <button class="gallery-nav prev">❮</button>
+                        <button class="gallery-nav next">❯</button>
+                        <div class="thumbnail-container">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop" alt="缩略图1" class="thumbnail active">
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop" alt="缩略图2" class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="缩略图3" class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop" alt="缩略图4" class="thumbnail">
+                        </div>
+                    </div>
                 </div>
-            </section>
+            </div>
 
-            <section class="section">
-                <h2 class="section-title">主要功能</h2>
+            <div class="project-section">
+                <h2 class="section-title">技术特点</h2>
                 <div class="section-content">
-                    <ul class="feature-list">
-                        <li>功能特点一：详细描述该功能的具体实现和优势</li>
-                        <li>功能特点二：详细描述该功能的具体实现和优势</li>
-                        <li>功能特点三：详细描述该功能的具体实现和优势</li>
+                    <p>系统采用多项创新技术，包括：</p>
+                    <ul>
+                        <li>深度学习算法：使用卷积神经网络进行图像识别和路径规划</li>
+                        <li>实时控制系统：采用实时操作系统确保控制精度</li>
+                        <li>多传感器融合：整合视觉、力觉等多种传感器数据</li>
+                        <li>模块化设计：便于系统扩展和维护</li>
                     </ul>
                 </div>
-            </section>
+            </div>
 
-            <section class="section">
-                <h2 class="section-title">技术栈</h2>
+            <div class="project-section">
+                <h2 class="section-title">应用场景</h2>
                 <div class="section-content">
-                    <p>项目使用的主要技术和框架：</p>
-                    <ul class="feature-list">
-                        <li>前端：HTML5, CSS3, JavaScript</li>
-                        <li>后端：Node.js, Express</li>
-                        <li>数据库：MongoDB</li>
+                    <p>本系统可广泛应用于以下场景：</p>
+                    <ul>
+                        <li>精密加工：适用于高精度零件加工</li>
+                        <li>装配作业：可用于复杂产品的自动化装配</li>
+                        <li>质量检测：实现产品外观和尺寸的自动检测</li>
+                        <li>物流分拣：用于快递包裹的自动分拣</li>
                     </ul>
                 </div>
-            </section>
-
-            <section class="section">
-                <h2 class="section-title">项目成果</h2>
-                <div class="section-content">
-                    <p>描述项目取得的成果和影响，可以包含具体的数据和用户反馈。</p>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2 class="section-title">团队介绍</h2>
-                <div class="section-content">
-                    <p>项目团队成员来自哈工大郑州研究院双创基地，包括：</p>
-                    <ul class="feature-list">
-                        <li>项目负责人：XXX（教授/研究员）</li>
-                        <li>技术负责人：XXX（博士/硕士）</li>
-                        <li>开发团队：XXX等</li>
-                    </ul>
-                </div>
-            </section>
+            </div>
         </div>
+
+        <a href="index.html#projects" class="back-link"> 返回项目列表</a>
     </div>
 
+    <!-- 页脚区域 -->
     <footer class="footer">
         <div class="footer-content">
-            <h3>哈工大郑州研究院双创基地</h3>
-            <p>地址：河南省郑州市高新区科学大道100号</p>
-            <p>电话：0371-XXXXXXXX</p>
-            <p>邮箱：innovation@hit.edu.cn</p>
-            <p>© 2024 哈工大郑州研究院双创基地 版权所有</p>
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>联系我们</h3>
+                    <p>地址：河南省郑州市高新区科学大道100号</p>
+                    <p>电话：0371-88888888</p>
+                    <p>邮箱：contact@hit-zz.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="https://zri.hit.edu.cn/" target="_blank">哈工大郑州研究院</a></li>
+                        <li><a href="product-purchase.html">产品购买</a></li>
+                        <li><a href="contact.html">项目合作</a></li>
+                        <li><a href="project-entry.html">项目入驻</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>关注我们</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">微信</a>
+                        <a href="#" class="social-link">微博</a>
+                        <a href="#" class="social-link">抖音</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 哈工大郑州研究院双创基地 版权所有</p>
+                <p>豫ICP备XXXXXXXX号</p>
+            </div>
         </div>
     </footer>
+
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 图片轮播功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.project-image');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const prevBtn = document.querySelector('.gallery-nav.prev');
+            const nextBtn = document.querySelector('.gallery-nav.next');
+            let currentIndex = 0;
+
+            function updateImage(index) {
+                images.forEach(img => img.classList.remove('active'));
+                thumbnails.forEach(thumb => thumb.classList.remove('active'));
+                images[index].classList.add('active');
+                thumbnails[index].classList.add('active');
+                currentIndex = index;
+            }
+
+            thumbnails.forEach((thumb, index) => {
+                thumb.addEventListener('click', () => updateImage(index));
+            });
+
+            prevBtn.addEventListener('click', () => {
+                const newIndex = (currentIndex - 1 + images.length) % images.length;
+                updateImage(newIndex);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const newIndex = (currentIndex + 1) % images.length;
+                updateImage(newIndex);
+            });
+
+            // 自动轮播
+            let autoSlideInterval = setInterval(() => {
+                const newIndex = (currentIndex + 1) % images.length;
+                updateImage(newIndex);
+            }, 5000);
+
+            // 鼠标悬停时暂停自动轮播
+            const gallery = document.querySelector('.image-gallery');
+            gallery.addEventListener('mouseenter', () => {
+                clearInterval(autoSlideInterval);
+            });
+
+            gallery.addEventListener('mouseleave', () => {
+                autoSlideInterval = setInterval(() => {
+                    const newIndex = (currentIndex + 1) % images.length;
+                    updateImage(newIndex);
+                }, 5000);
+            });
+        });
+    </script>
 </body>
 </html> 
